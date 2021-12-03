@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_Transactioncyclecount" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_Transactioncyclecount.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="S_ORDIM_C_HANA">
+    <resourceUri>S_ORDIM_C_HANA</resourceUri>
+  </DataSource>
+  <DataSource id="S_T333A_HANA">
+    <resourceUri>S_T333A_HANA</resourceUri>
+  </DataSource>
+  <DataSource id="S_T300_HANA">
+    <resourceUri>S_T300_HANA</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="MANDT"/>
+      <viewAttribute id="LGNUM"/>
+      <viewAttribute id="TRART"/>
+      <viewAttribute id="NISTM" aggregationType="sum"/>
+      <viewAttribute id="TRART_1"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ORDIM">
+      <mapping xsi:type="Calculation:AttributeMapping" target="MANDT" source="MANDT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LGNUM" source="LGNUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TRART" source="TRART"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NISTM" source="NISTM"/>
+    </input>
+    <input node="T333A">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TRART_1" source="TRART"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TRART" source="TRART"/>
+    </input>
+    <joinAttribute name="TRART"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="ORDIM">
+    <viewAttributes>
+      <viewAttribute id="MANDT"/>
+      <viewAttribute id="LGNUM"/>
+      <viewAttribute id="TRART"/>
+      <viewAttribute id="NISTM"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="S_ORDIM_C_HANA"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="T333A">
+    <viewAttributes>
+      <viewAttribute id="TRART"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="S_T333A_HANA"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="MANDT"/>
+      <viewAttribute id="LGNUM"/>
+      <viewAttribute id="TRART"/>
+      <viewAttribute id="NISTM" aggregationType="sum"/>
+      <viewAttribute id="TRART_1"/>
+      <viewAttribute id="LGNUM_1"/>
+      <viewAttribute id="CTRLCIF"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="MANDT" source="MANDT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LGNUM" source="LGNUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TRART" source="TRART"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NISTM" source="NISTM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TRART_1" source="TRART_1"/>
+    </input>
+    <input node="Projection_3">
+      <mapping xsi:type="Calculation:AttributeMapping" target="LGNUM_1" source="LGNUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CTRLCIF" source="CTRLCIF"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LGNUM" source="LGNUM"/>
+    </input>
+    <joinAttribute name="LGNUM"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3">
+    <viewAttributes>
+      <viewAttribute id="LGNUM"/>
+      <viewAttribute id="CTRLCIF"/>
+    
+      <viewAttribute id="MANDT"/></viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="S_T300_HANA"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_2">
+  <attributes>
+    <attribute id="MANDT" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MANDT"/>
+      <keyMapping columnObjectName="Join_2" columnName="MANDT"/>
+    </attribute>
+    <attribute id="LGNUM" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LGNUM"/>
+      <keyMapping columnObjectName="Join_2" columnName="LGNUM"/>
+    </attribute>
+    <attribute id="TRART" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TRART"/>
+      <keyMapping columnObjectName="Join_2" columnName="TRART"/>
+    </attribute>
+    <attribute id="TRART_1" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TRART_1"/>
+      <keyMapping columnObjectName="Join_2" columnName="TRART_1"/>
+    </attribute>
+    <attribute id="LGNUM_1" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LGNUM"/>
+      <keyMapping columnObjectName="Join_2" columnName="LGNUM_1"/>
+    </attribute>
+    <attribute id="CTRLCIF" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CTRLCIF"/>
+      <keyMapping columnObjectName="Join_2" columnName="CTRLCIF"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="NISTM" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="NISTM"/>
+      <measureMapping columnObjectName="Join_2" columnName="NISTM"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="328" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="118" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="ORDIM" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="T333A" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape expanded="true" modelObjectName="ORDIM" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="516"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="T333A" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="516"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="328" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="134"/>
+    </shape>
+    <shape modelObjectName="Projection_3" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="136"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="395" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
