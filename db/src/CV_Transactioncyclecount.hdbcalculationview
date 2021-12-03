@@ -71,14 +71,14 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="NISTM" source="NISTM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="TRART_1" source="TRART_1"/>
     </input>
-    <input node="Projection_3">
+    <input node="T300">
       <mapping xsi:type="Calculation:AttributeMapping" target="LGNUM_1" source="LGNUM"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CTRLCIF" source="CTRLCIF"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="LGNUM" source="LGNUM"/>
     </input>
     <joinAttribute name="LGNUM"/>
   </calculationView>
-  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3">
+  <calculationView xsi:type="Calculation:ProjectionView" id="T300">
     <viewAttributes>
       <viewAttribute id="LGNUM"/>
       <viewAttribute id="CTRLCIF"/>
@@ -163,11 +163,11 @@
       <upperLeftCorner x="20" y="30"/>
       <rectangleSize width="134"/>
     </shape>
-    <shape modelObjectName="Projection_3" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="T300" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="320" y="30"/>
       <rectangleSize width="136"/>
     </shape>
-    <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+    <shape expanded="true" modelObjectName="T300" modelObjectNameSpace="CalculationView">
       <upperLeftCorner x="395" y="356"/>
       <rectangleSize height="30" width="160"/>
     </shape>
